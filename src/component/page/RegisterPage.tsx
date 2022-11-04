@@ -33,7 +33,7 @@ export default function RegisterPage() {
   // REDIRECT AFTER SUCCESS FORM SUBMIT
   useEffect(() => {
     if(redirect) {
-      navigate(MENUS.RegisterOk.link);
+      navigate(MENUS.registerOk.link);
     }
   })
 

@@ -7,7 +7,7 @@ import theme from '../../theme/theme';
 import {RouterProvider, Outlet} from 'react-router-dom';
 import router from '../route/router';
 import Typography from "@mui/material/Typography";
-
+import Loader from '../route/Loader';
 
 /**
  * Main Layout
@@ -23,10 +23,4 @@ import Typography from "@mui/material/Typography";
       </ThemeProvider>
     </Suspense>
   )
-}
-
-function Loader() {
-  return (
-    <Typography color='info'>Loading...</Typography>
-  );
 }
