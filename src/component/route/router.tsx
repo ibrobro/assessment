@@ -9,6 +9,9 @@ const RegisterPage = React.lazy(() => import('../page/RegisterPage'))
 const FindSomething = React.lazy(() => import('../page/FindSomething'));
 const RegisterOk = React.lazy(() => import('../page/RegisterOk'));
 
+/**
+ * Router
+ */
 const router = createBrowserRouter([
   {
     path: MENUS.home.link,

@@ -1,12 +1,10 @@
-import React, { ReactNode, Suspense } from "react";
+import React, { Suspense } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme/theme';
-import {RouterProvider, Outlet} from 'react-router-dom';
-import router from '../route/router';
-import Typography from "@mui/material/Typography";
+import {Outlet} from 'react-router-dom';
 import Loader from '../route/Loader';
 
 /**
