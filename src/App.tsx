@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import MainLayout from './component/layout/MainLayout';
+import router from './component/route/router';
+import {RouterProvider} from 'react-router-dom';
 
 
 /**
@@ -9,9 +10,7 @@ import MainLayout from './component/layout/MainLayout';
  */
 function App() {
   return (
-    <MainLayout>
-      TESTING!!!!
-    </MainLayout>
+    <RouterProvider router={router} />
   );
 }
 

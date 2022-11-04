@@ -17,11 +17,8 @@ interface ContentProps {
  */
 export default function Content({children}: ContentProps) {
   return (
-    <Container sx={{minHeight: '95vh'}}>
-      <Box sx={{color: 'red'}}>
-        {children}
-        <p>test</p>
-      </Box>
+    <Container sx={{minHeight: '95vh', mt: '100px'}}>
+      {children}
     </Container>
   )
 }

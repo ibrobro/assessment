@@ -15,8 +15,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
-import MENUS from "../../data/menu";
+import MENUS, {MenuStructure} from "../../data/menu";
 import Stack from "@mui/material/Stack";
+import {Link} from 'react-router-dom';
 
 
 /*******************************************************************************
@@ -100,12 +101,17 @@ function Logo() {
         px: 1
       }
     }}>
-      <Button>
-        <Typography variant='h6' component={'h2'}>Home</Typography>
-      </Button>
-      <Button>
-        <Typography variant='h6' component={'h2'}>Find Something</Typography>
-      </Button>
+      {Object.keys(MENUS).filter((key) => {
+          if(key === 'registerOk') return false;
+          return true;
+        }).map((m, i) => {
+        const menu = MENUS[m] as MenuStructure;
+        return (
+          <Link key={i} to={menu.link}>
+            <Typography sx={{p: 1}} variant='h6' component={'h2'}>{menu.title}</Typography>
+          </Link>
+        );
+      })}
     </Stack>
   )
  }
@@ -129,17 +135,27 @@ function MobileMenu() {
       <Toolbar />
       <Divider />
       <List>
-        {MENUS.map((menu, index) => (
+        {Object.keys(MENUS).filter((key) => {
+          if(key === 'registerOk') return false;
+          return true;
+        }).map((key, index) => {
+          const menu = MENUS[key] as MenuStructure;
+          return (
           <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <menu.icon/>
-              </ListItemIcon>
+            <Link to={menu.link}>
+              <Stack direction='row' sx={{display: 'flex', alignItems: 'center'}}>
+              {menu.icon && 
+                <ListItemIcon>
+                  <menu.icon />
+                </ListItemIcon>
+              }
               <ListItemText primary={menu.title} />
-            </ListItemButton>
+              </Stack>
+            </Link>
             <Divider />
           </ListItem>
-        ))}
+          )
+        })}
       </List>
     </div>
   );
