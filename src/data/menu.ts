@@ -1,4 +1,5 @@
 import HomeIcon from '@mui/icons-material/Home';
+import ErrorIcon from '@mui/icons-material/Error';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
@@ -31,7 +32,7 @@ const MENUS: Menus = {
   notFoudTest: {
     title: 'Render no page found',
     link: '/test-no-page',
-    icon: PageviewIcon,
+    icon: ErrorIcon,
   },
   registerOk: {
     title: 'Register ok',

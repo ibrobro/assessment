@@ -40,9 +40,9 @@ export default function NotFound() {
             <Typography color='error' variant='body1'>
               {error.statusText || error.message}.
             </Typography>
-            <Button variant='outlined'>
-              <Link to={MENUS.home.link}>Back to Home</Link>
-            </Button>
+              <Link to={MENUS.home.link}>
+                <Button variant='outlined'>Back to Home</Button>
+              </Link>
           </Stack>
         </Paper>
       </Container>

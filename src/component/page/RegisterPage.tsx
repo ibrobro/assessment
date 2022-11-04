@@ -33,7 +33,7 @@ export default function RegisterPage() {
   // REDIRECT AFTER SUCCESS FORM SUBMIT
   useEffect(() => {
     if(redirect) {
-      navigate(MENUS.RegisterOk.link);
+      navigate(MENUS.registerOk.link);
     }
   })
 
@@ -91,7 +91,7 @@ export default function RegisterPage() {
           >
             <MenuItem value=''><em>None</em></MenuItem>
             {US_STATES.map((m,k) => (
-              <MenuItem value={m.code}>{m.name}</MenuItem>
+              <MenuItem key={k} value={m.code}>{m.name}</MenuItem>
             ))}
           </Select>
           <Button onClick={handleSubmit} size='large' variant='outlined' sx={{alignSelf: 'flex-end'}}>Submit</Button>

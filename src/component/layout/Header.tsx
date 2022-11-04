@@ -104,12 +104,18 @@ function Logo() {
       {Object.keys(MENUS).filter((key) => {
           if(key === 'registerOk') return false;
           return true;
-        }).map((m, i) => {
+        }).map((m, i, rows) => {
         const menu = MENUS[m] as MenuStructure;
         return (
-          <Link key={i} to={menu.link}>
-            <Typography sx={{p: 1}} variant='h6' component={'h2'}>{menu.title}</Typography>
-          </Link>
+          <Stack direction='row' key={i}>
+            <Divider orientation='vertical' color='primary' />
+            <Link to={menu.link}>
+              <Typography sx={{p: 1}} variant='h6' component={'h2'}>{menu.title}</Typography>
+            </Link>
+            {(i + 1) === rows.length && 
+              <Divider orientation='vertical' color='primary' />
+            }
+          </Stack>
         );
       })}
     </Stack>
@@ -128,10 +134,16 @@ function MobileMenu() {
     setMobileOpen(!mobileOpen);
   }
 
+
+  const closeDrawer = () => {
+    setMobileOpen(false);
+  }
+
+
   const drawerWidth = 240;
 
   const drawer = (
-    <div>
+    <Box sx={{p: 1}}>
       <Toolbar />
       <Divider />
       <List>
@@ -142,22 +154,24 @@ function MobileMenu() {
           const menu = MENUS[key] as MenuStructure;
           return (
           <ListItem key={index} disablePadding>
-            <Link to={menu.link}>
-              <Stack direction='row' sx={{display: 'flex', alignItems: 'center'}}>
-              {menu.icon && 
-                <ListItemIcon>
-                  <menu.icon />
-                </ListItemIcon>
-              }
-              <ListItemText primary={menu.title} />
-              </Stack>
-            </Link>
-            <Divider />
+            <ListItemButton onClick={closeDrawer}>
+              <Link to={menu.link}>
+                <Stack direction='row' sx={{display: 'flex', alignItems: 'center'}}>
+                {menu.icon && 
+                  <ListItemIcon>
+                    <menu.icon />
+                  </ListItemIcon>
+                }
+                <ListItemText sx={{textTransform: 'capitalize'}} primary={menu.title} />
+                </Stack>
+                <Divider />
+              </Link>
+            </ListItemButton>
           </ListItem>
           )
         })}
       </List>
-    </div>
+    </Box>
   );
 
   const container = window !== undefined ? () => window.document.body : undefined;
@@ -168,7 +182,7 @@ function MobileMenu() {
       aria-label="open drawer"
       edge="start"
       onClick={toggleMobileOpen}
-      sx={{ mr: 2, display: { md: 'none' } }}
+      sx={{ mr: 1, display: { md: 'none' } }}
     >
       <MenuIcon />
       <Drawer
