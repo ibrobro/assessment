@@ -1,13 +1,17 @@
+import HomeIcon from '@mui/icons-material/Home';
+import PageviewIcon from '@mui/icons-material/Pageview';
+
 const MENUS = [
   {
     title: 'Home',
     link: '/',
+    icon: HomeIcon,
 
   },
   {
-    title: 'Page 2',
-    link: '/page2',
-
+    title: 'Find Something',
+    link: '/find',
+    icon: PageviewIcon,
   },
 ];
 
