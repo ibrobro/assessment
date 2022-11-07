@@ -55,7 +55,8 @@ export default function RegisterPage() {
       <Paper 
         variant='outlined' 
         sx={{
-          width: {md: '400px', xs:'200px'},
+          m: 1,
+          width: {xs:'400px', sm: '600', md: '800px', },
           p: 1,
         }}
       >
