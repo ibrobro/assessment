@@ -11,6 +11,11 @@ import MenuItem from "@mui/material/MenuItem";
 import US_STATES from '../../data/us-states';
 import { useNavigate } from 'react-router-dom';
 import MENUS from '../../data/menu';
+import { 
+  ALPHA_NUMERIC_REGEX, 
+  ALPHA_NUMERIC_DASH_APOST_REGEX,
+  NUMERIC_REGEX
+} from '../../data/reg-constants';
 
 /**
  * Register Contact Page
@@ -18,8 +23,12 @@ import MENUS from '../../data/menu';
  */
 export default function RegisterPage() {
   const navigate = useNavigate();
-  const [state, setState] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [zip, setZip] = useState('');
+  const [state, setState] = useState('');
 
   const handleStateChange = (e: SelectChangeEvent) => {
     setState(e.target.value);
@@ -63,11 +72,21 @@ export default function RegisterPage() {
             label='First Name'
             placeholder='ex: John'
             fullWidth
+            onKeyDown={e => {
+              if(!ALPHA_NUMERIC_REGEX.test(e.key)){
+                e.preventDefault();
+              }
+            }}
           />
           <TextField 
             label='Last Name'
             placeholder='ex: Appleseed, O"reilly, mac-arthur'
             fullWidth
+            onKeyDown={e => {
+              if(!ALPHA_NUMERIC_DASH_APOST_REGEX.test(e.key)){
+                e.preventDefault();
+              }
+            }}
           />
           <TextField 
             label='Email'
@@ -78,8 +97,9 @@ export default function RegisterPage() {
             label='Zip Code'
             placeholder='Zip Code'
             fullWidth
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           />
-          <InputLabel id="demo-select-small">Age</InputLabel>
+          <InputLabel id="demo-select-small">State</InputLabel>
           <Select
             labelId="demo-select-small"
             id="demo-select-small"
