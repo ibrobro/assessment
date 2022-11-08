@@ -1,204 +1,69 @@
-const US_STATES = [
-  {
-    "name": "Alabama",
-    "code": "AL"
-  },
-  {
-    "name": "Alaska",
-    "code": "AK"
-  },
-  {
-    "name": "Arizona",
-    "code": "AZ"
-  },
-  {
-    "name": "Arkansas",
-    "code": "AR"
-  },
-  {
-    "name": "California",
-    "code": "CA"
-  },
-  {
-    "name": "Colorado",
-    "code": "CO"
-  },
-  {
-    "name": "Connecticut",
-    "code": "CT"
-  },
-  {
-    "name": "Delaware",
-    "code": "DE"
-  },
-  {
-    "name": "Florida",
-    "code": "FL"
-  },
-  {
-    "name": "Georgia",
-    "code": "GA"
-  },
-  {
-    "name": "Hawaii",
-    "code": "HI"
-  },
-  {
-    "name": "Idaho",
-    "code": "ID"
-  },
-  {
-    "name": "Illinois",
-    "code": "IL"
-  },
-  {
-    "name": "Indiana",
-    "code": "IN"
-  },
-  {
-    "name": "Iowa",
-    "code": "IA"
-  },
-  {
-    "name": "Kansas",
-    "code": "KS"
-  },
-  {
-    "name": "Kentucky",
-    "code": "KY"
-  },
-  {
-    "name": "Louisiana",
-    "code": "LA"
-  },
-  {
-    "name": "Maine",
-    "code": "ME"
-  },
-  {
-    "name": "Maryland",
-    "code": "MD"
-  },
-  {
-    "name": "Massachusetts",
-    "code": "MA"
-  },
-  {
-    "name": "Michigan",
-    "code": "MI"
-  },
-  {
-    "name": "Minnesota",
-    "code": "MN"
-  },
-  {
-    "name": "Mississippi",
-    "code": "MS"
-  },
-  {
-    "name": "Missouri",
-    "code": "MO"
-  },
-  {
-    "name": "Montana",
-    "code": "MT"
-  },
-  {
-    "name": "Nebraska",
-    "code": "NE"
-  },
-  {
-    "name": "Nevada",
-    "code": "NV"
-  },
-  {
-    "name": "New Hampshire",
-    "code": "NH"
-  },
-  {
-    "name": "New Jersey",
-    "code": "NJ"
-  },
-  {
-    "name": "New Mexico",
-    "code": "NM"
-  },
-  {
-    "name": "New York",
-    "code": "NY"
-  },
-  {
-    "name": "North Carolina",
-    "code": "NC"
-  },
-  {
-    "name": "North Dakota",
-    "code": "ND"
-  },
-  {
-    "name": "Ohio",
-    "code": "OH"
-  },
-  {
-    "name": "Oklahoma",
-    "code": "OK"
-  },
-  {
-    "name": "Oregon",
-    "code": "OR"
-  },
-  {
-    "name": "Pennsylvania",
-    "code": "PA"
-  },
-  {
-    "name": "Rhode Island",
-    "code": "RI"
-  },
-  {
-    "name": "South Carolina",
-    "code": "SC"
-  },
-  {
-    "name": "South Dakota",
-    "code": "SD"
-  },
-  {
-    "name": "Tennessee",
-    "code": "TN"
-  },
-  {
-    "name": "Texas",
-    "code": "TX"
-  },
-  {
-    "name": "Utah",
-    "code": "UT"
-  },
-  {
-    "name": "Vermont",
-    "code": "VT"
-  },
-  {
-    "name": "Virginia",
-    "code": "VA"
-  },
-  {
-    "name": "Washington",
-    "code": "WA"
-  },
-  {
-    "name": "West Virginia",
-    "code": "WV"
-  },
-  {
-    "name": "Wisconsin",
-    "code": "WI"
-  },
-  {
-    "name": "Wyoming",
-    "code": "WY"
-  }
-];
+/**
+ * US STATES CONST, SAME FORMAT WITH ONES USED IN PHP SIDE
+ */
+const US_STATES: {[id: string]: string} = {
+  'AL' : 'ALABAMA',
+  'AK' : 'ALASKA',
+  'AS' : 'AMERICAN SAMOA',
+  'AZ' : 'ARIZONA',
+  'AR' : 'ARKANSAS',
+  'CA' : 'CALIFORNIA',
+  'CO' : 'COLORADO',
+  'CT' : 'CONNECTICUT',
+  'DE' : 'DELAWARE',
+  'DC' : 'DISTRICT OF COLUMBIA',
+  'FM' : 'FEDERATED STATES OF MICRONESIA',
+  'FL' : 'FLORIDA',
+  'GA' : 'GEORGIA',
+  'GU' : 'GUAM GU',
+  'HI' : 'HAWAII',
+  'ID' : 'IDAHO',
+  'IL' : 'ILLINOIS',
+  'IN' : 'INDIANA',
+  'IA' : 'IOWA',
+  'KS' : 'KANSAS',
+  'KY' : 'KENTUCKY',
+  'LA' : 'LOUISIANA',
+  'ME' : 'MAINE',
+  'MH' : 'MARSHALL ISLANDS',
+  'MD' : 'MARYLAND',
+  'MA' : 'MASSACHUSETTS',
+  'MI' : 'MICHIGAN',
+  'MN' : 'MINNESOTA',
+  'MS' : 'MISSISSIPPI',
+  'MO' : 'MISSOURI',
+  'MT' : 'MONTANA',
+  'NE' : 'NEBRASKA',
+  'NV' : 'NEVADA',
+  'NH' : 'NEW HAMPSHIRE',
+  'NJ' : 'NEW JERSEY',
+  'NM' : 'NEW MEXICO',
+  'NY' : 'NEW YORK',
+  'NC' : 'NORTH CAROLINA',
+  'ND' : 'NORTH DAKOTA',
+  'MP' : 'NORTHERN MARIANA ISLANDS',
+  'OH' : 'OHIO',
+  'OK' : 'OKLAHOMA',
+  'OR' : 'OREGON',
+  'PW' : 'PALAU',
+  'PA' : 'PENNSYLVANIA',
+  'PR' : 'PUERTO RICO',
+  'RI' : 'RHODE ISLAND',
+  'SC' : 'SOUTH CAROLINA',
+  'SD' : 'SOUTH DAKOTA',
+  'TN' : 'TENNESSEE',
+  'TX' : 'TEXAS',
+  'UT' : 'UTAH',
+  'VT' : 'VERMONT',
+  'VI' : 'VIRGIN ISLANDS',
+  'VA' : 'VIRGINIA',
+  'WA' : 'WASHINGTON',
+  'WV' : 'WEST VIRGINIA',
+  'WI' : 'WISCONSIN',
+  'WY' : 'WYOMING',
+  'AE' : 'ARMED FORCES AFRICA \ CANADA \ EUROPE \ MIDDLE EAST',
+  'AA' : 'ARMED FORCES AMERICA (EXCEPT CANADA)',
+  'AP' : 'ARMED FORCES PACIFIC'
+}
 
 export default US_STATES;

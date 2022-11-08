@@ -110,8 +110,8 @@ export default function RegisterPage() {
             sx={{mb: 1}}
           >
             <MenuItem value=''><em>None</em></MenuItem>
-            {US_STATES.map((m,k) => (
-              <MenuItem key={k} value={m.code}>{m.name}</MenuItem>
+            {Object.keys(US_STATES).map((m, k) => (
+              <MenuItem key={k} value={m}>{US_STATES[m]}</MenuItem>
             ))}
           </Select>
           <Button onClick={handleSubmit} size='large' variant='outlined' sx={{alignSelf: 'flex-end'}}>Submit</Button>
