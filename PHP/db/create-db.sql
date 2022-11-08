@@ -13,12 +13,14 @@ CREATE TABLE `tb_account`(
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `zipCode` varchar(10) NOT NULL,
-  `state` int(2) NOT NULL
+  `state` VARCHAR(2) NOT NULL
 ) ENGINE InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `tb_account` ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `tb_account`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+GRANT ALL PRIVILEGES ON `db_assessment`.* TO `wave`@`localhost`;
 
 COMMIT;

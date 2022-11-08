@@ -16,6 +16,9 @@
     //DATA VALIDATIONS
     try {
     
+      if(strlen($firstName) === 0) {
+        array_push($inputErrors, array('field' => 'firstName', 'message' => 'Empty first name'));
+      }
       if(!AccountModel::validateEmail($email)) {
         array_push($inputErrors, array('field' => 'email', 'message' => 'Invalid E-mail Address'));
       }
@@ -30,6 +33,24 @@
         throw new \Exception('Input Errors');
       }
 
+      try {
+        $account = new AccountModel();
+        $account->setFirstName($firstName);
+        $account->setLastName($lastName);
+        $account->setEmail($email);
+        $account->setZipCode($zipCode);
+        $account->setState($state);
+
+        if($account->saveNew()) {
+          $status = true;
+        } else {
+          throw new \Exception('Fail to save data');
+        }
+
+      } catch(\Exception $e) {
+        throw new \Exception('Data Saving Error');
+      }
+      
       $status = true;
     } catch (\Exception $e) {
       throw $e;
@@ -48,6 +69,4 @@
         'inputErrors' => $inputErrors,
       )
   ));
-
-  //$accountModel = new AccountModel();
 ?>

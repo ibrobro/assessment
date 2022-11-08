@@ -28,6 +28,7 @@
       $dbPassword = 'cloud';
       try {
         $this->_pdo = new PDO($dsn, $dbUser, $dbPassword);
+        $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch(\Exception $e) {
         echo($e);
         echo('Fatal Error..Exit');
@@ -42,7 +43,7 @@
 
 
     public function __wakeup() {
-      throw new Exception('Not Allowed!');
+      throw new \Exception('Not Allowed!');
     }
 
     
