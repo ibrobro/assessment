@@ -1,9 +1,17 @@
 <?php
   // LOAD REQUIRED FILES
   require_once('db/model/AccountModel.php');
+  require_once('lib/cors.php');
 
   // DATA MODEL NAMESPACE
   use DB\AccountModel as AccountModel;
+
+  // SET RESPONSE HEADER
+  header('Content-Type: application/json; charset=utf-8');
+
+  if(isAllowedByCors()) {
+    setAllowedCorsHeader();
+  }
 
   //RECEIVE and DESTRUCTURED POST DATA
   extract($_POST);
@@ -61,7 +69,6 @@
   }
 
   // RESPONSE
-  header('Content-Type: application/json; charset=utf-8');
   echo(json_encode(
       array(
         'status' => $status, 

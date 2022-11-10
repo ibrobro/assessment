@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -9,8 +10,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Select, {SelectChangeEvent} from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import US_STATES from '../../data/us-states';
-import { useNavigate } from 'react-router-dom';
 import MENUS from '../../data/menu';
+import MyAxios from '../../lib/axios/MyAxios';
 import {
   validateUsZipCode,
   validateEmail,
@@ -23,7 +24,8 @@ import {
   NUMERIC_REGEX,
   EMAIL_REGEX
 } from '../../data/reg-constants';
-import { isSetAccessorDeclaration } from 'typescript';
+import { AxiosError } from 'axios';
+import Alert from '@mui/material/Alert';
 
 
 /**
@@ -35,7 +37,6 @@ const FORM_ERRRORS_INIT: {[id: string]: boolean} = {
   firstName: false,
   state: false,
 }
-
 
 /**
  * INITAL FORM VALUES
@@ -63,13 +64,14 @@ export default function RegisterPage() {
   const [formValues, setFormValues] = useState({...FORM_VALUE_INIT});
   // If true submit the from
   const [readyToSubmit, setReadyToSubmit] = useState(false);
+  // Error from POST
+  const [postError, setPostError] = useState<string|null>(null);
 
   // Text Input Changes Handling
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     const newFormErrors = {...formErrors};
     const newFormValues = {...formValues};
-
     if(name==='email') {
       newFormErrors['email'] = !validateEmail(value); 
     } else if(name==='zipCode') {
@@ -77,9 +79,7 @@ export default function RegisterPage() {
     } else if(name==='firstName') {
       newFormErrors['firstName'] = isEmpty(value);
     }
-    
     newFormValues[name] = value;
-    
     setFormValues(newFormValues);
     setFormErrors(newFormErrors);
   }
@@ -89,13 +89,10 @@ export default function RegisterPage() {
     const {name, value} = e.target;
     const newFormErrors = {...formErrors};
     const newFormValues = {...formValues};
-
     if(name==='state') {
       newFormErrors['state'] = !validateStateCode(value);
     }
-
     newFormValues[name] = value;
-    
     setFormValues(newFormValues);
     setFormErrors(newFormErrors);
   };
@@ -103,19 +100,50 @@ export default function RegisterPage() {
   // LAST CHECK BEFORE SUBMIT
   const formDoubleCheck =() => {
     const newFormErrors = {...formErrors};
-
     newFormErrors['firstName'] = isEmpty(formValues['firstName']);
     newFormErrors['email'] = !validateEmail(formValues['email']);
     newFormErrors['zipCode'] = !validateUsZipCode(formValues['zipCode']);
     newFormErrors['state'] = !validateStateCode(formValues['state']);
-    
     setFormErrors(newFormErrors);
     setReadyToSubmit(!Object.values(newFormErrors).includes(true));
   }
 
   const handleSubmit = () => {
+    setPostError(null);
     formDoubleCheck();
+  }
 
+  // Submit form to API
+  const doSubmit = () => {
+    const {firstName, lastName, email, zipCode, state} = formValues;
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('email', email);
+    formData.append('zipCode', zipCode);
+    formData.append('state', state);
+
+    MyAxios.post('/', formData)
+    .then(r => {
+      if(r.data.status === true) {
+        setRedirect(true);
+      } else {
+        try {
+          const {errors, inputErrors} = r.data;
+          setPostError(errors?.join(' ')||'');
+          setFormErrors(
+            inputErrors?.reduce((prev: {field: string; message: string}[], curr: {field: string; message: string}) => {
+              return {...prev, [curr.field]: true};
+            })
+            || {...FORM_ERRRORS_INIT});
+        } catch(e) {
+          setPostError(`Error parsing server input: ${(e as Error).message}`);
+        }
+      }
+    })
+    .catch((e: AxiosError) => {
+      setPostError(e.message);
+    })
   }
 
   // Redirect after good form submission
@@ -128,11 +156,12 @@ export default function RegisterPage() {
   // SUBMIT IF FORM Clear and Ready
   useEffect(() => {
     if(readyToSubmit) {
-      setRedirect(true);
+      doSubmit();
     }
     return (() => setReadyToSubmit(false));
   }, [readyToSubmit]);
 
+  // RENDER UI
   return(
     <Box
       sx={{
@@ -157,6 +186,11 @@ export default function RegisterPage() {
           }}
         >
           <Typography variant='h2'>Contact</Typography>
+          <Box sx={{height: '12vh', mb: 2}}>
+            {postError && 
+              <Alert variant='outlined' color='warning'>{postError}</Alert>
+            }
+          </Box>
           <TextField 
             label='First Name'
             name='firstName'
