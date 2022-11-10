@@ -1,14 +1,16 @@
+import US_STATES from "../data/us-states";
+import {
+  EMAIL_REGEX,
+  US_ZIP_REGEX,
+} from '../data/reg-constants';
+
 /**
  * Validate Email String
  * @param email 
  * @returns 
  */
 export const validateEmail = (email: string) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+  return EMAIL_REGEX.test(email);
 };
 
 
@@ -18,5 +20,24 @@ export const validateEmail = (email: string) => {
  * @returns 
  */
 export const validateUsZipCode = (zipCode: string) => {
-  return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+  return US_ZIP_REGEX.test(zipCode);
+}
+
+
+/**
+ * Validate State
+ * @param stateCode
+ * @returns 
+ */
+ export const validateStateCode = (stateCode: string) => {
+  return stateCode in US_STATES;
+}
+
+/**
+ * Validate MUST NOT BE EMPTY
+ * @param text
+ * @returns 
+ */
+ export const isEmpty = (text: string) => {
+  return text?.trim() === '';
 }
